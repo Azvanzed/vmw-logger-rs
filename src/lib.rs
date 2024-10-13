@@ -1,6 +1,4 @@
 #![no_std]
-#![allow(static_mut_refs)]
-#![allow(static_mut_refs)]
 
 mod logger;
 

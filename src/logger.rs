@@ -105,9 +105,7 @@ impl Builder {
 
     /// Setup a logger based on the configuration.
     pub fn setup(self) {
-        unsafe {
-            log::set_logger(&LOGGER).unwrap();
-        }
+        log::set_logger(&LOGGER).unwrap();
 
         log::set_max_level(self.filter);
     }
