@@ -1,4 +1,4 @@
-static mut LOGGER: VMWLogger = VMWLogger::new();
+static LOGGER: VMWLogger = VMWLogger::new();
 
 pub type Formatter = fn(&mut dyn core::fmt::Write, &log::Record) -> Result<(), core::fmt::Error>;
 
@@ -13,19 +13,11 @@ fn default_formatter(buffer: &mut dyn core::fmt::Write, record: &log::Record) ->
     )
 }
 
-struct VMWLogger {
-    formatter: Formatter,
-}
+struct VMWLogger;
 
 impl VMWLogger {
     const fn new() -> Self {
-        Self {
-            formatter: default_formatter,
-        }
-    }
-
-    fn set_formatter(&mut self, new_formatter: Formatter) {
-        self.formatter = new_formatter;
+        Self
     }
 }
 
@@ -87,7 +79,7 @@ impl log::Log for VMWLogger {
     }
 
     fn log(&self, record: &log::Record) {
-        let _ = (self.formatter)(&mut VMWLogger::new(), record); // lol
+        let _ = default_formatter(&mut VMWLogger::new(), record); // lol
     }
 
     fn flush(&self) {}
@@ -95,7 +87,6 @@ impl log::Log for VMWLogger {
 
 pub struct Builder {
     filter: log::LevelFilter,
-    formatter: Formatter,
 }
 
 impl Builder {
@@ -103,7 +94,6 @@ impl Builder {
     pub fn new() -> Self {
         Self {
             filter: log::LevelFilter::Info,
-            formatter: default_formatter,
         }
     }
 
@@ -113,16 +103,9 @@ impl Builder {
         self
     }
 
-    /// Set formatter.
-    pub fn formatter(mut self, formatter: Formatter) -> Self {
-        self.formatter = formatter;
-        self
-    }
-
     /// Setup a logger based on the configuration.
     pub fn setup(self) {
         unsafe {
-            LOGGER.set_formatter(self.formatter) ;
             log::set_logger(&LOGGER).unwrap();
         }
 
