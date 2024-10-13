@@ -1,11 +1,9 @@
 static LOGGER: VMWLogger = VMWLogger::new();
 
-pub type Formatter = fn(&mut dyn core::fmt::Write, &log::Record) -> Result<(), core::fmt::Error>;
-
 fn default_formatter(buffer: &mut dyn core::fmt::Write, record: &log::Record) -> Result<(), core::fmt::Error> {
     writeln!(
         buffer,
-        "[{}:{} - {}]: {}",
+        "[{}:{} - {}] {}",
         record.file().unwrap_or("<unknown>"),
         record.line().unwrap_or(0),
         record.level(),
