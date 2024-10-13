@@ -2,4 +2,4 @@
 
 mod logger;
 
-pub use crate::logger::{builder, init, init_with_filter, Builder, Formatter};
+pub use crate::logger::{builder, init, init_with_filter, Builder};
