@@ -2,6 +2,10 @@
 name = "vmw-logger"
 version = "0.1.0"
 edition = "2021"
+description = "A VMWare logger using built-in backdoor."
+readme = "README.md"
+repository = "https://github.com/Azvanzed/vmw-logger"
+license-file = "LICENSE"
 
 [dependencies]
 log = "0.4.22"
