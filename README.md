@@ -13,3 +13,4 @@ log.keep = "FALSE"
 
 ### Credits
 - jessie (intege_rs)
+- YushiOMOTE
