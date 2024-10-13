@@ -1,4 +1,4 @@
-# vmw-logger
+# vmw-logger-rs
 A VMware logger rust crate that leverages an undocumented built-in backdoor for guest-host interaction with no_std support.
 
 ### How to enable
